@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Homepage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">ShopEase</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="/login" class="nav-link">Login</a>
+            <a href="/signup" class="nav-link">Signup</a>
+            <a href="#" class="cart" onclick="toggleCart()">
+                <img src="cart-icon.png" alt="Cart" class="cart-icon">
+                <span class="cart-count" id="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Banner -->
+    <header class="main-banner">
+        <div class="banner-content">
+            <h1>Welcome to ShopEase</h1>
+            <p>Your one-stop shop for all your needs!</p>
+            <a href="#" class="shop-now-btn">Shop Now</a>
+        </div>
+    </header>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="product1.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>$19.99</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Product 1', 19.99)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="product2.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>$29.99</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Product 2', 29.99)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="product3.jpg" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>$39.99</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Product 3', 39.99)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="product4.jpg" alt="Product 4">
+                <h3>Product 4</h3>
+                <p>$49.99</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Product 4', 49.99)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <div class="cart-section" id="cart-section">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button onclick="clearCart()" class="clear-cart-btn">Clear Cart</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 ShopEase. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        let cart = [];
+        let cartCount = 0;
+        let cartTotal = 0.00;
+
+        function addToCart(productName, productPrice) {
+            cart.push({ name: productName, price: productPrice });
+            cartCount++;
+            cartTotal += productPrice;
+            
+            document.getElementById("cart-count").textContent = cartCount;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById("cart-items");
+            cartItemsContainer.innerHTML = ""; // Clear previous items
+
+            cart.forEach(item => {
+                const cartItem = document.createElement("div");
+                cartItem.classList.add("cart-item");
+                cartItem.innerHTML = `<span>${item.name}</span><span>$${item.price.toFixed(2)}</span>`;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            document.getElementById("cart-total").textContent = cartTotal.toFixed(2);
+        }
+
+        function toggleCart() {
+            const cartSection = document.getElementById("cart-section");
+            cartSection.style.display = cartSection.style.display === "block" ? "none" : "block";
+        }
+
+        function clearCart() {
+            cart = [];
+            cartCount = 0;
+            cartTotal = 0.00;
+
+            document.getElementById("cart-count").textContent = cartCount;
+            updateCart();
+        }
+    </script>
+</body>
+</html>
