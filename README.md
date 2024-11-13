@@ -41,3 +41,4 @@ CREATE TABLE users (
 
 select * from users;
 
+https://chatgpt.com/share/67346b23-f42c-8000-a6dd-5c754a6dbf5b
